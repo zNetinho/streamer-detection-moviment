@@ -7,7 +7,7 @@ export default class HandGestureController {
     #camera
     #lastDirection = {
         direction: '',
-        y:0
+        y: 0
     }
     constructor({view, service, camera}) {
         this.#service = service,
@@ -19,7 +19,7 @@ export default class HandGestureController {
       }
 
       #scrollPage(direction) {
-        const pixelsPerScroll = 100;
+        const pixelsPerScroll = 100
         if(this.#lastDirection.direction === direction) {
             this.#lastDirection.y = (
                 direction === 'scroll-down'?
@@ -28,7 +28,7 @@ export default class HandGestureController {
             )
         }
         else {
-            this.#lastDirection.direction - direction
+            this.#lastDirection.direction = direction
         }
         this.#view.scrollPage(this.#lastDirection.y)
       }
@@ -38,12 +38,14 @@ export default class HandGestureController {
             const hands = await this.#service.estimateHands(this.#camera.video)
             for await(const {event, x, y} of this.#service.detectGestures(hands)) {
                 if(event.includes('scroll')) {
+                  if(!scrollShoulRun()) continue;
                     this.#scrollPage(event)
                 }
             }
-            console.log({ hands })
+            return hands
+
         } catch (error) {
-            
+            console.log(error)
         }
       }
     

@@ -26,19 +26,19 @@ export default class HandGestureService {
             if(!hand.keypoints3D) continue
 
             const gestures = await this.estimate(hand.keypoints3D) 
-            if(!gestures.lenght) continue;
+            if(!gestures.length) continue;
 
             const result = gestures.reduce((previous, next ) => (previous.score > next.score) ? previous: next)
-            const { x, y} = hand.keypoints.find(keypoint => keypoint.name === 'index_finger_tip')
+            const { x, y } = hand.keypoints.find(keypoint => keypoint.name === 'index_finger_tip')
             // Acelera o laço, utilizando yield assim que ele ja tiver o valor ele ja volta para quem chamou no caso a função
             yield {event: result.name, x, y}
-            console.log(`Detected, ${gestureStrings[result.name]} ${x, y}`)
+            console.log(`Detected, ${gestureStrings[result.name]}`)
         }
     }
 
     #getLandMarksFromKeypoints(keypoints3D) {
         return keypoints3D.map(keypoint =>
-            [keypoint.x, keypoint,y, keypoint.z]
+            [keypoint.x, keypoint.y, keypoint.z]
         )
     }
 
