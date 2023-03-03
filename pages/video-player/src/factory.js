@@ -5,6 +5,7 @@ import Service from "./service.js"
 import View from "./view.js"
 
 async function getWorker() {
+  debugger
   if (supportsWorkerType()) {
     console.log('initializing esm workers')
     const worker = new Worker('./src/worker.js', { type: 'module' })

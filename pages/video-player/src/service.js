@@ -1,5 +1,5 @@
 import { prepareRunChecker } from "../../../lib/shared/util.js"
-const { shouldRun } = prepareRunChecker({ timerDelay: 500 })
+const { shouldRun } = prepareRunChecker({ timerDelay: 400 })
  
 const EAR_THRESHOLD = 0.27
 export default class Service {

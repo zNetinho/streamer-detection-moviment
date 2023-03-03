@@ -37,9 +37,9 @@ export default class HandGestureController {
       async #estimateHands() {
         try {
             const hands = await this.#service.estimateHands(this.#camera.video)
-            this.#view.clearCanvas()
+            this.#view.clear()
             if(hands && hands.length) {
-              this.#view.drawResults(hands)
+              this.#view.drawResult(hands)
             }
             for await(const {event, x, y} of this.#service.detectGestures(hands)) {
               if (event === 'click') {
