@@ -1,14 +1,18 @@
-import { knownGestures, gestureStrings } from "../utils/gestures.js"
+import { knownGestures, gestureStrings } from "../utils/util.js"
 
 export default class HandGestureService {
     #gestureEstimator
     #handPoseDetection
     #handsVersion
     #detector = null
+    #knownGestures 
+    #gestureStrings
     constructor({ fingerpose, handPoseDetection, handsVersion }) {
         this.#gestureEstimator = new fingerpose.GestureEstimator(knownGestures) 
         this.#handPoseDetection = handPoseDetection
         this.#handsVersion = handsVersion
+        this.#knownGestures = knownGestures
+        this.#gestureStrings = gestureStrings
     }
 
     async estimate(keypoints3D) {
@@ -32,7 +36,7 @@ export default class HandGestureService {
             const { x, y } = hand.keypoints.find(keypoint => keypoint.name === 'index_finger_tip')
             // Acelera o laço, utilizando yield assim que ele ja tiver o valor ele ja volta para quem chamou no caso a função
             yield {event: result.name, x, y}
-            console.log(`Detected, ${gestureStrings[result.name]}`)
+            console.log(`Detected, ${this.#gestureStrings[result.name]}`)
         }
     }
 
