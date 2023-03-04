@@ -29,18 +29,21 @@ for (let finger of Finger.all) {
 
 // Click
 // -----------------------------------------------------------------------------
+//Indicador está curvado
 ClickGesture.addCurl(Finger.Index, FingerCurl.HalfCurl, 0.8)
+//Indica que tbm pode ser totalmente fechado
 ClickGesture.addCurl(Finger.Index, FingerCurl.FullCurl, 0.5)
-
+//Dedaão não pode curva
 ClickGesture.addCurl(Finger.Thumb, FingerCurl.NoCurl, 1.0)
+//Dedão pode estar meio curvado, confiança do movimento baixa
 ClickGesture.addCurl(Finger.Thumb, FingerCurl.HalfCurl, 0.4)
-
+//Dedo do meio fechado e totalmente fechado
 ClickGesture.addCurl(Finger.Middle, FingerCurl.HalfCurl, 1.0)
 ClickGesture.addCurl(Finger.Middle, FingerCurl.FullCurl, 0.9)
-
+//Dedo anelar meio fechado e totalmente fechado
 ClickGesture.addCurl(Finger.Ring, FingerCurl.HalfCurl, 1.0)
 ClickGesture.addCurl(Finger.Ring, FingerCurl.FullCurl, 0.9)
-
+//Dedo mindinho meio fechado e totalmente fechado
 ClickGesture.addCurl(Finger.Pinky, FingerCurl.HalfCurl, 1.0)
 ClickGesture.addCurl(Finger.Pinky, FingerCurl.FullCurl, 0.9)
 

@@ -1,5 +1,3 @@
-import { knownGestures, gestureStrings } from "../utils/util.js"
-
 export default class HandGestureService {
     #gestureEstimator
     #handPoseDetection
@@ -7,7 +5,7 @@ export default class HandGestureService {
     #detector = null
     #knownGestures 
     #gestureStrings
-    constructor({ fingerpose, handPoseDetection, handsVersion }) {
+    constructor({ fingerpose, handPoseDetection, handsVersion, knownGestures, gestureStrings }) {
         this.#gestureEstimator = new fingerpose.GestureEstimator(knownGestures) 
         this.#handPoseDetection = handPoseDetection
         this.#handsVersion = handsVersion
@@ -49,7 +47,7 @@ export default class HandGestureService {
     async estimateHands(video) {
         return this.#detector.estimateHands(video, {
             // espelha a camera, para aconpanhar o caminho e movimento correto.
-            flipHorinzontal: true,
+            flipHorinzontal: false,
         })
     }
 
